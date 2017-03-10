@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Hello</h1>
+    <form id="myForm">
+      <label for="orgName">Organisation name: </label>
+      <input type="text" for="orgName" autofocus autocomplete="on">
+      <button class="btn" type="submit" value="Submit">Submit</button>
+    </form>
+
+    <ol id="members">
+    </ol>
+
+    <script type="text/javascript">
+
+
+      var url = `//localhost:3000/view`;
+      $('#myForm').on('submit', function(event) {
+        event.preventDefault();
+        $('btn').prop('disabled', true);
+        var parameters = { 
+          orgName: $('input[for="orgName"]').val()
+        };
+        $.get(url, parameters)
+          .done(function(data) {
+            console.log(JSON.parse(data));
+            
+            $('btn').prop('disabled', false);
+          });
+        
+      
+      });
+
+    </script>
+  </body>
+
+</html>
